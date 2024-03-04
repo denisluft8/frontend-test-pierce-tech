@@ -1,0 +1,22 @@
+.eventCard {
+  background-color: #28a769;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justift-items: center;
+  line-height: 18px;
+}
+
+.deleteButton {
+  border: none;
+  height: 20px;
+  cursor: pointer;
+  width: 110px;
+  height: 24px;
+  color: #000;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  margin: 8px 0;
+}
