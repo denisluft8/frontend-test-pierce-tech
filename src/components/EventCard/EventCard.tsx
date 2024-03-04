@@ -4,12 +4,15 @@ import styles from "./EventCard.module.css";
 
 interface EventCardProps {
   event: Event;
-  onDelete: () => void;
+  onDelete: (eventId: number) => void;
 }
 
 export const EventCard = ({ event, onDelete }: EventCardProps) => {
   const isEventBeforeToday = new Date(event.eventDate) < new Date();
 
+  const handleDelete = () => {
+    onDelete(event.id);
+  };
   return (
     <div
       className={styles.eventCard}
@@ -20,7 +23,7 @@ export const EventCard = ({ event, onDelete }: EventCardProps) => {
         {formatDate(event.eventDate)} at {formatTime(event.eventDate)}
       </p>
       <p>{event.description}</p>
-      <button className={styles.deleteButton} onClick={onDelete}>
+      <button className={styles.deleteButton} onClick={handleDelete}>
         Delete Event
       </button>
     </div>
