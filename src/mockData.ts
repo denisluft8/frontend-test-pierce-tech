@@ -1,18 +1,14 @@
 export const mockedData = [
   {
     id: 1,
-    name: "Sample Event 1",
-    creationDate: "2024-03-04",
-    eventDate: "2024-03-10",
-    eventHour: "18:00",
-    description: "This is a sample event description 1",
+    name: "Anna's Gift",
+    eventDate: "2024-03-02T12:10:00Z",
+    description: "Buy Anna's Gift",
   },
   {
     id: 2,
-    name: "Sample Event 2",
-    creationDate: "2024-03-04",
-    eventDate: "2024-03-15",
-    eventHour: "14:30",
-    description: "This is a sample event description 2",
+    name: "Ana's Birthday",
+    eventDate: "2024-03-25T12:08:00Z",
+    description: "Anna's birthday at restaurant",
   },
 ];
