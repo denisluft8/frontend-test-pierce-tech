@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "..";
 import { EventType } from "../../types";
 import styles from "./Form.module.css";
+
 interface FormProps {
   initialValues: EventType;
   onSubmit: (updatedValues: EventType) => void;
@@ -10,20 +11,27 @@ interface FormProps {
   onClose: () => void;
 }
 
-export const Form: React.FC<FormProps> = ({
+export const Form = ({
   initialValues,
   onSubmit,
   isNewEvent,
   highestId,
   onClose,
-}) => {
+}: FormProps) => {
   const [formData, setFormData] = useState<EventType>({
     ...initialValues,
     id: isNewEvent ? highestId + 1 : initialValues.id,
   });
+
   const [nameValid, setNameValid] = useState<boolean>(false);
   const [dateValid, setDateValid] = useState<boolean>(false);
   const [descriptionValid, setDescriptionValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    setNameValid(initialValues.name.length >= 5);
+    setDateValid(initialValues.eventDate.trim() !== "");
+    setDescriptionValid(initialValues.description.split(" ").length > 1);
+  }, [initialValues]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
