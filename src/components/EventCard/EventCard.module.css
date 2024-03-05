@@ -1,11 +1,11 @@
 .eventCard {
-  background-color: #28a769;
   width: 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justift-items: center;
   line-height: 18px;
+  text-align: center;
 }
 
 .button {

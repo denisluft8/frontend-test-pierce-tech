@@ -30,3 +30,10 @@ export const updateEvent = (updatedEvent: EventType) => ({
   type: UPDATE_EVENT,
   payload: updatedEvent,
 });
+
+export const ADD_EVENT = "ADD_EVENT";
+
+export const addEvent = (newEvent: EventType) => ({
+  type: ADD_EVENT,
+  payload: newEvent,
+});

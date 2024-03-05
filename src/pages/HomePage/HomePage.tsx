@@ -6,14 +6,17 @@ import {
   deleteEvent,
   setData,
   updateEvent,
+  addEvent,
 } from "../../redux/actions/eventActions";
-import { StateTypes, EventType } from "../../types"; // Use alias here
+import { StateTypes, EventType } from "../../types";
 
 import { EventCard, Form } from "../../components";
 
 export const HomePage = () => {
   const dispatch = useDispatch();
   const [editingEventId, setEditingEventId] = useState<number | null>(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false);
 
   const data = useSelector((state: StateTypes) => state.events.data);
 
@@ -25,10 +28,17 @@ export const HomePage = () => {
 
   const handleUpdateEvent = (eventId: number) => {
     setEditingEventId(eventId);
+    setIsUpdateModalOpen(true);
   };
 
   const handleUpdateSubmit = (updatedValues: EventType) => {
     dispatch(updateEvent(updatedValues));
+    setEditingEventId(null);
+    setIsUpdateModalOpen(false);
+  };
+
+  const handleAddEvent = (newEvent: EventType) => {
+    dispatch(addEvent(newEvent));
     setEditingEventId(null);
   };
 
@@ -42,8 +52,16 @@ export const HomePage = () => {
       <div className={styles.eventsContainer}>
         {data.map((event) => (
           <div key={event.id}>
-            {editingEventId === event.id ? (
-              <Form initialValues={event} onSubmit={handleUpdateSubmit} />
+            {editingEventId === event.id && isUpdateModalOpen ? (
+              <Form
+                initialValues={event}
+                onSubmit={handleUpdateSubmit}
+                isNewEvent={false}
+                onClose={() => {
+                  setIsUpdateModalOpen(false);
+                }}
+                highestId={0}
+              />
             ) : (
               <EventCard
                 event={event}
@@ -54,6 +72,18 @@ export const HomePage = () => {
           </div>
         ))}
       </div>
+      <button onClick={() => setIsAddModalOpen(!isAddModalOpen)}>
+        Add Event
+      </button>
+      {isAddModalOpen && (
+        <Form
+          initialValues={{ name: "", eventDate: "", description: "" }}
+          onSubmit={handleAddEvent}
+          isNewEvent={true}
+          onClose={() => setIsAddModalOpen(false)}
+          highestId={Math.max(...data.map((event) => event.id), 0)}
+        />
+      )}
     </section>
   );
 };
