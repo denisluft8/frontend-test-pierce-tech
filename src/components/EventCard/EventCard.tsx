@@ -22,7 +22,7 @@ export const EventCard = ({ event, onDelete, onUpdate }: EventCardProps) => {
   };
 
   const handleShowDetails = () => {
-    setShowDescription(true);
+    setShowDescription(!showDescription);
   };
 
   return (
@@ -37,6 +37,13 @@ export const EventCard = ({ event, onDelete, onUpdate }: EventCardProps) => {
             {formatDate(event.eventDate)} at {formatTime(event.eventDate)}
           </p>
           <p>{event.description}</p>
+          <button
+            type="button"
+            className={styles.closeButton}
+            onClick={handleShowDetails}
+          >
+            x
+          </button>
           <div>
             <button
               type="button"
