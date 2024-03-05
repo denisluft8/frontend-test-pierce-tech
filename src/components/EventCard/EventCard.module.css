@@ -6,6 +6,7 @@
   justift-items: center;
   line-height: 18px;
   text-align: center;
+  position: relative;
 }
 
 .button {
@@ -25,4 +26,13 @@
 
 .button:hover {
   filter: drop-shadow(4px 4px 6px gray);
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
