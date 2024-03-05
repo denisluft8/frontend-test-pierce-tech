@@ -1,32 +1,68 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Input } from "..";
 import { EventType } from "../../types";
-
+import styles from "./Form.module.css";
 interface FormProps {
   initialValues: EventType;
   onSubmit: (updatedValues: EventType) => void;
+  isNewEvent?: boolean;
+  highestId: number;
+  onClose: () => void;
 }
 
-export const Form: React.FC<FormProps> = ({ initialValues, onSubmit }) => {
-  const [formData, setFormData] = useState<EventType>(initialValues);
+export const Form: React.FC<FormProps> = ({
+  initialValues,
+  onSubmit,
+  isNewEvent,
+  highestId,
+  onClose,
+}) => {
+  const [formData, setFormData] = useState<EventType>({
+    ...initialValues,
+    id: isNewEvent ? highestId + 1 : initialValues.id,
+  });
+  const [nameValid, setNameValid] = useState<boolean>(false);
+  const [dateValid, setDateValid] = useState<boolean>(false);
+  const [descriptionValid, setDescriptionValid] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+
+    if (name === "name") {
+      setNameValid(value.length >= 5);
+    } else if (name === "eventDate") {
+      setDateValid(value.trim() !== "");
+    } else if (name === "description") {
+      setDescriptionValid(value.split(" ").length > 1);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+
+    if (isNewEvent) {
+      onSubmit({
+        ...formData,
+        id: highestId + 1,
+      });
+    } else {
+      onSubmit(formData);
+    }
+  };
+
+  const handleClose = () => {
+    onClose();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <Input
         label={"Event Name"}
         name={"name"}
         value={formData.name}
         onChange={handleChange}
+        isValid={nameValid}
       />
       <Input
         label={"Event Date"}
@@ -34,14 +70,28 @@ export const Form: React.FC<FormProps> = ({ initialValues, onSubmit }) => {
         datePicker
         value={formData.eventDate}
         onChange={handleChange}
+        isValid={dateValid}
       />
       <Input
         label={"Event Description"}
         name={"description"}
         value={formData.description}
         onChange={handleChange}
+        isValid={descriptionValid}
       />
-      <button type="submit">Submit</button>
+      <button
+        type="submit"
+        disabled={!nameValid || !dateValid || !descriptionValid}
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        className={styles.closeButton}
+        onClick={handleClose}
+      >
+        x
+      </button>
     </form>
   );
 };

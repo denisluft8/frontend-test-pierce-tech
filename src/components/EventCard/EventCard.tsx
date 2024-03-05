@@ -12,15 +12,17 @@ export const EventCard = ({ event, onDelete, onUpdate }: EventCardProps) => {
   const isEventBeforeToday = new Date(event.eventDate) < new Date();
 
   const handleDelete = () => {
-    onDelete(event.id);
+    event.id !== undefined && onDelete(event.id);
   };
+
   const handleUpdate = () => {
-    onUpdate(event.id);
+    event.id !== undefined && onUpdate(event.id);
   };
+
   return (
     <div
       className={styles.eventCard}
-      style={{ opacity: isEventBeforeToday ? "0.4" : "1" }}
+      style={{ backgroundColor: isEventBeforeToday ? "#837c7f" : "#28a769" }}
     >
       <h3>{event.name}</h3>
       <p>

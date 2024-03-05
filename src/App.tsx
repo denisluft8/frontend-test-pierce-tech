@@ -1,11 +1,15 @@
+import { Provider } from "react-redux";
+import { HomePage } from "./pages";
+import store from "./redux/stores/store";
 
 function App() {
-
   return (
     <>
-      <div>Hello World</div>
+      <Provider store={store}>
+        <HomePage />
+      </Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
