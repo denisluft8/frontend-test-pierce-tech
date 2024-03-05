@@ -57,6 +57,7 @@ export const Form = ({
     } else {
       onSubmit(formData);
     }
+    onClose();
   };
 
   const handleClose = () => {
@@ -71,6 +72,7 @@ export const Form = ({
         value={formData.name}
         onChange={handleChange}
         isValid={nameValid}
+        invalidMessage="Name field must consist of a minimum of 5 characters."
       />
       <Input
         label={"Event Date"}
@@ -86,6 +88,7 @@ export const Form = ({
         value={formData.description}
         onChange={handleChange}
         isValid={descriptionValid}
+        invalidMessage="Description field must consist of a minimum of 2 words."
       />
       <button
         type="submit"
