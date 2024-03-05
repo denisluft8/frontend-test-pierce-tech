@@ -8,15 +8,21 @@
   line-height: 18px;
 }
 
-.deleteButton {
+.button {
   border: none;
   height: 20px;
   cursor: pointer;
-  width: 110px;
+  width: 80px;
   height: 24px;
   color: #000;
   background: #fff;
   border-radius: 8px;
   border: 1px solid transparent;
   margin: 8px 0;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.button:hover {
+  filter: drop-shadow(4px 4px 6px gray);
 }

@@ -1,4 +1,4 @@
-import { Event } from "./eventTypes";
+import { EventType } from "./eventTypes";
 import { StateTypes } from "./stateTypes";
 
-export type { Event, StateTypes };
+export type { EventType, StateTypes };

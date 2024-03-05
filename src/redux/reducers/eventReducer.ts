@@ -1,13 +1,13 @@
-import { Event } from "../../types";
-import { DELETE_EVENT, SET_DATA } from "../actions/eventActions";
+import { EventType } from "../../types";
+import { DELETE_EVENT, SET_DATA, UPDATE_EVENT } from "../actions/eventActions";
 
 const initialState = {
-  data: [] as Event[],
+  data: [] as EventType[],
 };
 
 interface SetDataAction {
   type: typeof SET_DATA;
-  payload: Event[];
+  payload: EventType[];
 }
 
 interface DeleteEventAction {
@@ -15,10 +15,15 @@ interface DeleteEventAction {
   payload: number;
 }
 
-type EventAction = SetDataAction | DeleteEventAction;
+interface UpdateEventAction {
+  type: typeof UPDATE_EVENT;
+  payload: EventType;
+}
+
+type EventAction = SetDataAction | DeleteEventAction | UpdateEventAction;
 
 interface EventState {
-  data: Event[];
+  data: EventType[];
 }
 
 const eventReducer = (
@@ -35,6 +40,13 @@ const eventReducer = (
       return {
         ...state,
         data: state.data.filter((event) => event.id !== action.payload),
+      };
+    case UPDATE_EVENT:
+      return {
+        ...state,
+        data: state.data.map((event) =>
+          event.id === action.payload.id ? action.payload : event
+        ),
       };
     default:
       return state;
