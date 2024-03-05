@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+Event Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a web application built with React and TypeScript, designed as an event management web application. It was developed as part of a frontend test at Pierce Tech. It simulates fetching data and stores it in a global state using Redux. The application allows users to view a list of events, show details, edit, or delete them. Additionally, there is a feature to add new events through a form with field validation.
 
-Currently, two official plugins are available:
+Getting Started
+To test the project, follow these steps:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Clone this repository.
+```
+git clone https://github.com/denisluft8/frontend-test-pierce-tech.git
+```
+Install dependencies.
+```
+cd frontend-test-pierce-tech
+npm install
+```
+Run the development server.
+```
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Project Structure
+```
+src/
+|-- api/                  # Contains functions for fetching mock data
+|-- components/           # Reusable components (EventCard, Form, Input)
+|-- pages/                # Application pages (HomePage)
+|-- redux/                # Global state files with actions to set, add, update, and delete events
+|-- types/                # Type definitions
+|-- utils/                # Utilities such as date formatting
+```
+
