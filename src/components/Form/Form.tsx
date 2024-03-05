@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { Input } from "..";
 import { EventType } from "../../types";
 import styles from "./Form.module.css";
@@ -33,7 +33,9 @@ export const Form = ({
     setDescriptionValid(initialValues.description.split(" ").length > 1);
   }, [initialValues]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
 
@@ -88,6 +90,7 @@ export const Form = ({
         value={formData.description}
         onChange={handleChange}
         isValid={descriptionValid}
+        isTextArea
         invalidMessage="Description field must consist of a minimum of 2 words."
       />
       <button
