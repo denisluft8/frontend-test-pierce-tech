@@ -1,7 +1,7 @@
-import { Event } from ".";
+import { EventType } from ".";
 
 export interface StateTypes {
   events: {
-    data: Event[];
+    data: EventType[];
   };
 }

@@ -19,8 +19,9 @@ export const HomePage = () => {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false);
 
   const data = useSelector((state: StateTypes) => state.events.data);
-
-  console.log(data);
+  const eventIds = data
+    .map((event) => event.id)
+    .filter((id): id is number => typeof id === "number");
 
   const handleDeleteEvent = (eventId: number) => {
     dispatch(deleteEvent(eventId));
@@ -81,7 +82,7 @@ export const HomePage = () => {
           onSubmit={handleAddEvent}
           isNewEvent={true}
           onClose={() => setIsAddModalOpen(false)}
-          highestId={Math.max(...data.map((event) => event.id), 0)}
+          highestId={Math.max(...eventIds, 0)}
         />
       )}
     </section>
