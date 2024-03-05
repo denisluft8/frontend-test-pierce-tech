@@ -48,24 +48,39 @@ const eventReducer = (
     case SET_DATA:
       return {
         ...state,
-        data: action.payload,
+        data: action.payload.sort((a, b) => {
+          const dateA = new Date(a.eventDate).getTime();
+          const dateB = new Date(b.eventDate).getTime();
+          return dateA - dateB;
+        }),
       };
     case DELETE_EVENT:
       return {
         ...state,
         data: state.data.filter((event) => event.id !== action.payload),
       };
-    case UPDATE_EVENT:
+    case UPDATE_EVENT: {
+      const updatedEvent = action.payload;
+      const updatedData = state.data.map((event) =>
+        event.id === updatedEvent.id ? updatedEvent : event
+      );
       return {
         ...state,
-        data: state.data.map((event) =>
-          event.id === action.payload.id ? action.payload : event
-        ),
+        data: updatedData.sort((a, b) => {
+          const dateA = new Date(a.eventDate).getTime();
+          const dateB = new Date(b.eventDate).getTime();
+          return dateA - dateB;
+        }),
       };
+    }
     case ADD_EVENT:
       return {
         ...state,
-        data: [...state.data, action.payload as EventType],
+        data: [...state.data, action.payload as EventType].sort((a, b) => {
+          const dateA = new Date(a.eventDate).getTime();
+          const dateB = new Date(b.eventDate).getTime();
+          return dateA - dateB;
+        }),
       };
     default:
       return state;
