@@ -13,4 +13,18 @@
   font-size: 10px;
   position: absolute;
   bottom: -12px;
+  right: 0;
+  width: 300px;
+}
+
+@media only screen and (max-width: 430px) {
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .errorMessage {
+    width: 300px;
+    bottom: -12px;
+    left: -12px;
+  }
 }
