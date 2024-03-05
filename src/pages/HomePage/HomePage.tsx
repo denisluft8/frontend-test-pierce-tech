@@ -48,7 +48,7 @@ export const HomePage = () => {
 
   return (
     <section className={styles.homepage}>
-      <h1>Event Management</h1>
+      <h1 className={styles.title}>Event Management</h1>
       <div className={styles.eventsContainer}>
         {data.map((event) => (
           <div key={event.id}>
