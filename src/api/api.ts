@@ -1,15 +1,15 @@
-import { Event } from "../types";
+import { EventType } from "../types";
 
-export const fetchData = (data: Event[]) => {
+export const fetchData = (data: EventType[]) => {
   return Promise.resolve(data);
 };
 
-export const addData = (newEvent: Event, data: Event[]) => {
+export const addData = (newEvent: EventType, data: EventType[]) => {
   const updatedData = [...data, newEvent];
   return Promise.resolve(updatedData);
 };
 
-export const updateData = (updatedEvent: Event, data: Event[]) => {
+export const updateData = (updatedEvent: EventType, data: EventType[]) => {
   const updatedData = data.map((event) =>
     event.id === updatedEvent.id ? updatedEvent : event
   );

@@ -1,17 +1,21 @@
-import { Event } from "../../types";
+import { EventType } from "../../types";
 import { formatDate, formatTime } from "../../utils";
 import styles from "./EventCard.module.css";
 
 interface EventCardProps {
-  event: Event;
+  event: EventType;
   onDelete: (eventId: number) => void;
+  onUpdate: (eventId: number) => void;
 }
 
-export const EventCard = ({ event, onDelete }: EventCardProps) => {
+export const EventCard = ({ event, onDelete, onUpdate }: EventCardProps) => {
   const isEventBeforeToday = new Date(event.eventDate) < new Date();
 
   const handleDelete = () => {
     onDelete(event.id);
+  };
+  const handleUpdate = () => {
+    onUpdate(event.id);
   };
   return (
     <div
@@ -23,9 +27,14 @@ export const EventCard = ({ event, onDelete }: EventCardProps) => {
         {formatDate(event.eventDate)} at {formatTime(event.eventDate)}
       </p>
       <p>{event.description}</p>
-      <button className={styles.deleteButton} onClick={handleDelete}>
-        Delete Event
-      </button>
+      <div>
+        <button className={styles.button} onClick={handleUpdate}>
+          Update
+        </button>
+        <button className={styles.button} onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 };

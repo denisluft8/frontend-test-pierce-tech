@@ -1,6 +1,7 @@
 import { fetchData } from "../../api/api";
 import { mockedData } from "../../mockData";
 import { Dispatch } from "redux";
+import { EventType } from "../../types";
 
 export const SET_DATA = "SET_DATA";
 
@@ -21,4 +22,11 @@ export const DELETE_EVENT = "DELETE_EVENT";
 export const deleteEvent = (eventId: number) => ({
   type: DELETE_EVENT,
   payload: eventId,
+});
+
+export const UPDATE_EVENT = "UPDATE_EVENT";
+
+export const updateEvent = (updatedEvent: EventType) => ({
+  type: UPDATE_EVENT,
+  payload: updatedEvent,
 });
